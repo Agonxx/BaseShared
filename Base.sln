@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.API", "Base.API\Base.API.csproj", "{DB563A64-C9A3-494C-8186-9E20D6E48160}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.API", "Base.API\Base.API.csproj", "{DB563A64-C9A3-494C-8186-9E20D6E48160}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.Shared", "Base.Shared\Base.Shared.csproj", "{B71A78DC-BB52-4DD7-A942-98F5370C34E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.Shared", "Base.Shared\Base.Shared.csproj", "{B71A78DC-BB52-4DD7-A942-98F5370C34E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base.APP", "Base.APP\Base.APP.csproj", "{58A739BE-FBC8-4A41-BE6B-FC12F1650B1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Base.APP", "Base.APP\Base.APP.csproj", "{58A739BE-FBC8-4A41-BE6B-FC12F1650B1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
