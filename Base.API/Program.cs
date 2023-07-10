@@ -20,6 +20,13 @@ builder.Services.AddDbContext<BaseContext>(options =>
     options.UseSqlServer(connectionString));
 
 
+builder.Services.AddCors(options => options
+    .AddDefaultPolicy(builder => builder
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .AllowAnyOrigin()));
+
+
 // Area para declarar os Respositorys
 builder.Services.AddScoped<UsuarioRepository>();
 
@@ -45,4 +52,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseCors();
 app.Run();
