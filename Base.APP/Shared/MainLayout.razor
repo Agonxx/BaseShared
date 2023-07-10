@@ -1,10 +1,9 @@
 ﻿@using Base.APP.Services.Autenticacao;
+@using Blazored.LocalStorage;
 @inherits LayoutComponentBase
 
-@inject Blazored.LocalStorage.ILocalStorageService _localStorage
+@inject ILocalStorageService _localStorage
 @inject AuthService _loginService
-@inject NavigationManager NavigationManager
-@inject IJSRuntime JSRuntime
 
 <div class="page">
     <div class="sidebar">
