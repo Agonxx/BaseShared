@@ -13,14 +13,14 @@ namespace Base.API.Repository
             _db = context;
         }
 
-        public Usuario CadastrarUsuario(Usuario usuario)
+        public async Task<Usuario> CadastrarUsuario(Usuario usuario)
         {
-            _db.Usuarios.Add(usuario);
-            _db.SaveChanges();
+            await _db.Usuarios.AddAsync(usuario);
+            await _db.SaveChangesAsync();
             return usuario;
         }
 
-        public Usuario AddUsuario()
+        public async Task<Usuario> AddUsuario()
         {
             var user = new Usuario
             {
@@ -29,8 +29,8 @@ namespace Base.API.Repository
                 Email = "Rafhita1@gmail.com"
             };
 
-            _db.Usuarios.Add(user);
-            _db.SaveChanges();
+            await _db.Usuarios.AddAsync(user);
+            await _db.SaveChangesAsync();
             return user;
         }
 

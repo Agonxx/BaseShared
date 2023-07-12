@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Base.APP.Service.Interfaces;
+using Microsoft.AspNetCore.Components;
 using static Base.APP.Pages.FetchData;
 
 namespace Base.APP.Service

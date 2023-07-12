@@ -5,7 +5,7 @@
 namespace Base.API.Migrations
 {
     /// <inheritdoc />
-    public partial class Ini : Migration
+    public partial class iNI : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

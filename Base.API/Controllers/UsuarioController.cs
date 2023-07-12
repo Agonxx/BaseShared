@@ -18,16 +18,16 @@ namespace Base.API.Controllers
         }
 
         [HttpPost(UsuarioAPI.CadastrarUsuario)]
-        public Usuario CadastrarUsuario(Usuario usuario)
+        public async Task<Usuario> CadastrarUsuario(Usuario usuario)
         {
-            usuario = _usuarioRepository.CadastrarUsuario(usuario);
+            usuario = await _usuarioRepository.CadastrarUsuario(usuario);
             return usuario;
         }
 
         [HttpGet(UsuarioAPI.AddUsuario)]
-        public Usuario AddUsuario()
+        public async Task<Usuario> AddUsuario()
         {
-            var usuario = _usuarioRepository.AddUsuario();
+            var usuario = await _usuarioRepository.AddUsuario();
             return usuario;
         }
 

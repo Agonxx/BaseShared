@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Base.APP.Service.Interfaces;
+using Microsoft.AspNetCore.Components;
 using Newtonsoft.Json;
 
 namespace Base.APP.Service
