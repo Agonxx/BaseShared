@@ -25171,7 +25171,6 @@ tr.mud-table-row-group-indented-5 td:first-child {
 
 @media(min-width: 0) and (orientation:landscape) {
     .mud-main-content {
-        background-color: blueviolet;
         height: 100vh;
         padding-top: calc(var(--mud-appbar-height) - var(--mud-appbar-height)/4);
     }
@@ -25179,7 +25178,6 @@ tr.mud-table-row-group-indented-5 td:first-child {
 
 @media(min-width: 600px) {
     .mud-main-content {
-        background-color: blueviolet;
         height: 100vh;
         padding-top: var(--mud-appbar-height);
     }

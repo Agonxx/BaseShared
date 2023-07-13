@@ -5,9 +5,10 @@
 @using MudBlazor;
 
 @inject IUsuarioService _usuarioService
+@inject MudThemeProvider _mudThemeProvider
 
 <div style="text-align:center;">
-    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="AddUser">Adicionar Usuário</MudButton>
+    <MudButton Variant="Variant.Filled" Color="_mudThemeProvider.IsDarkMode ? Color.Primary : Color.Secondary" OnClick="AddUser">Adicionar Usuário</MudButton>
 </div>
 <div style="text-align:center;">
     <MudDataGrid Items="@Usuarios">
@@ -25,21 +26,19 @@
 
     protected override async Task OnInitializedAsync()
     {
-        Usuarios = await _usuarioService.BuscarUsuarios();
+        await AtualizaGrid();
         await base.OnInitializedAsync();
-        
+
     }
 
     public async Task AddUser()
     {
         var teste = await _usuarioService.AddUsuario();
+        await AtualizaGrid();
+    }
+    public async Task AtualizaGrid()
+    {
+        Usuarios = await _usuarioService.BuscarUsuarios();
+        StateHasChanged();
     }
 }
-
-<style>
-    .mud-table {
-        background-color: mediumpurple;
-    }
-
-</style>
-

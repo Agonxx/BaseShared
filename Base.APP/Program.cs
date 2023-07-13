@@ -13,6 +13,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 builder.Services.AddMudServices();
+builder.Services.AddScoped<MudThemeProvider>();
 
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
