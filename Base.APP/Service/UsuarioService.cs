@@ -19,5 +19,15 @@ namespace Base.APP.Service
             else
                 return null;
         }
+        
+        public async Task<List<Usuario>> BuscarUsuarios()
+        {
+            var content = await base.Get(UsuarioAPI.BuscarUsuarios);
+
+            if (!string.IsNullOrEmpty(content))
+                return JsonSerializer.Deserialize<List<Usuario>>(content, _options);
+            else
+                return null;
+        }
     }
 }

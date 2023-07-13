@@ -1,20 +1,45 @@
 ﻿@page "/"
+@page "/home"
 @using Base.APP.Service;
+@using Base.Shared.Models;
+@using MudBlazor;
 
 @inject IUsuarioService _usuarioService
-<PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
+<div style="text-align:center;">
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="AddUser">Adicionar Usuário</MudButton>
+</div>
+<div style="text-align:center;">
+    <MudDataGrid Items="@Usuarios">
+        <Columns>
+            <PropertyColumn Property="x => x.Id" />
+            <PropertyColumn Property="x => x.Nome" Title="Nr" />
+            <PropertyColumn Property="x => x.Apelido" />
+            <PropertyColumn Property="x => x.Email" />
+        </Columns>
+    </MudDataGrid>
+</div>
 
-Welcome to your new app.
-<button @onclick="AddUser">adicionar usuario</button>
-
-<SurveyPrompt Title="How is Blazor working for you?" />
 @code {
+    public List<Usuario> Usuarios { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Usuarios = await _usuarioService.BuscarUsuarios();
+        await base.OnInitializedAsync();
+        
+    }
 
     public async Task AddUser()
     {
         var teste = await _usuarioService.AddUsuario();
     }
-
 }
+
+<style>
+    .mud-table {
+        background-color: mediumpurple;
+    }
+
+</style>
+
