@@ -3,26 +3,65 @@
 @using Base.APP.Service;
 @using Base.Shared.Models;
 @using MudBlazor;
+@using Base.Shared.Enums;
 
 @inject IUsuarioService _usuarioService
 @inject MudThemeProvider _mudThemeProvider
 
-<div style="text-align:center;">
-    <MudButton Variant="Variant.Filled" Color="_mudThemeProvider.IsDarkMode ? Color.Primary : Color.Secondary" OnClick="AddUser">Adicionar Usuário</MudButton>
-</div>
-<div style="text-align:center;">
-    <MudDataGrid Items="@Usuarios">
+<div class="main-layout-base">
+    <MudGrid>
+        <MudItem xs="12">
+            <MudField Label="Escolha o gênero" Variant="Variant.Text" InnerPadding="false">
+                <MudRadioGroup @bind-SelectedOption="UsuarioObj.Genero" Required="true" RequiredError="Selecione o gênero">
+                    <MudRadio Option="@ComumEnums.EGenero.Masculino" Color="Color.Primary" Size="Size.Small">@ComumEnums.EGenero.Masculino.GetDescription()</MudRadio>
+                    <MudRadio Option="@ComumEnums.EGenero.Feminino" Color="Color.Primary" Size="Size.Small">@ComumEnums.EGenero.Feminino.GetDescription()</MudRadio>
+                    <MudRadio Option="@ComumEnums.EGenero.Outro" Color="Color.Primary" Size="Size.Small">@ComumEnums.EGenero.Outro.GetDescription()</MudRadio>
+                </MudRadioGroup>
+            </MudField>
+        </MudItem>
+        <MudItem xs="6">
+            <MudTextField Label="Nome" HelperText="exemplo de texto" @bind-Value="UsuarioObj.Nome" />
+        </MudItem>
+        <MudItem xs="6">
+            <MudTextField Label="Apelido" HelperText="exemplo de texto" @bind-Value="UsuarioObj.Apelido" />
+        </MudItem>
+        <MudItem xs="4">
+            <MudTextField Label="Email" HelperText="exemplo de texto" @bind-Value="UsuarioObj.Email" />
+        </MudItem>
+        <MudItem xs="4">
+            <MudSelect T="string" Label="Provedor" AnchorOrigin="Origin.BottomCenter" Disabled="string.IsNullOrEmpty(UsuarioObj.Email)" @bind-Value="UsuarioObj.Provedor" Clearable>
+                <MudSelectItem Value="@("@gmail.com")" />
+                <MudSelectItem Value="@("@outlook.com")" />
+                <MudSelectItem Value="@("@hotmail.com")" />
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="4">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Style="width: 120px" OnClick="CadastrarUsuario">
+                Cadastrar
+            </MudButton>
+        </MudItem>
+    </MudGrid>
+
+    <MudDataGrid T="Usuario" Items="@Usuarios">
         <Columns>
-            <PropertyColumn Property="x => x.Id" />
-            <PropertyColumn Property="x => x.Nome" Title="Nr" />
-            <PropertyColumn Property="x => x.Apelido" />
-            <PropertyColumn Property="x => x.Email" />
+            <PropertyColumn Property="x => x.Nome" Title="Nome" />
+            <PropertyColumn Property="x => x.Apelido" Title="Apelido" />
+            <PropertyColumn Property="x => x.Genero" Title="Gênero" />
+            <PropertyColumn Property="x => x.Email" Title="Email" />
         </Columns>
     </MudDataGrid>
 </div>
 
+<MudDialog Style="text-align:center" IsVisible="DialogVisible" OnBackdropClick="() => DialogVisible = false">
+    <DialogContent>
+        Falha ao cadastrar usuário
+    </DialogContent>
+</MudDialog>
+
 @code {
     public List<Usuario> Usuarios { get; set; } = new();
+    public Usuario UsuarioObj { get; set; } = new();
+    public bool DialogVisible { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -31,10 +70,19 @@
 
     }
 
-    public async Task AddUser()
+    public async Task CadastrarUsuario()
     {
-        var teste = await _usuarioService.AddUsuario();
-        await AtualizaGrid();
+        var teste = await _usuarioService.CadastrarUsuario(UsuarioObj);
+        if (teste is not null)
+        {
+            await AtualizaGrid();
+            UsuarioObj = new();
+        }
+        else
+        {
+            DialogVisible = true;
+        }
+
     }
     public async Task AtualizaGrid()
     {
@@ -42,3 +90,11 @@
         StateHasChanged();
     }
 }
+<style>
+    .main-layout-base {
+        width: 700px;
+        text-align: center;
+        padding: 10px;
+        background-color: #383843;
+    }
+</style>

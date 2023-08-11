@@ -5,7 +5,7 @@
 namespace Base.API.Migrations
 {
     /// <inheritdoc />
-    public partial class iNI : Migration
+    public partial class Ini : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,7 +18,8 @@ namespace Base.API.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Apelido = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Genero = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {

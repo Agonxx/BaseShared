@@ -1,5 +1,7 @@
-﻿using System.ComponentModel;
+﻿using Base.Shared.Enums;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Base.Shared.Models
 {
@@ -13,7 +15,12 @@ namespace Base.Shared.Models
         public string Apelido { get; set; }
         [DisplayName("E-mail")]
         public string Email { get; set; }
+        [DisplayName("Genero")]
+        public ComumEnums.EGenero Genero { get; set; }
 
+        [NotMapped]
+        [DisplayName("Provedor")]
+        public string Provedor { get; set; }
     }
 
     public static class UsuarioAPI

@@ -1,5 +1,4 @@
-﻿
-@inject MudThemeProvider _mudThemeProvider
+﻿@inject MudThemeProvider _mudThemeProvider
 @inherits LayoutComponentBase
 
 <MudThemeProvider @ref="_mudThemeProvider" IsDarkMode="_mudThemeProvider.IsDarkMode" />
@@ -7,36 +6,32 @@
 <MudSnackbarProvider />
 
 <MudLayout>
-
-    <MudAppBar Elevation="0" Color="_mudThemeProvider.IsDarkMode ? Color.Primary : Color.Secondary" Style="text-align:center;">
+    <MudAppBar Elevation="0" Color="_mudThemeProvider.IsDarkMode ? Color.Primary : Color.Dark" Style="text-align:center;">
         <MudSpacer />
-        <MudToggleIconButton @bind-Toggled="@_mudThemeProvider.IsDarkMode"
-                             Icon="@Icons.Material.Filled.LightMode" Color="@Color.Warning" Title="Off"
-                             ToggledIcon="@Icons.Material.Filled.DarkMode" ToggledColor="@Color.Warning" ToggledTitle="On" />
-        <MudIconButton Href="home" Icon="@Icons.Material.Filled.Home" Color="_mudThemeProvider.IsDarkMode ? Color.Secondary : Color.Primary" />
-        @*<MudIconButton Href="counter" Icon="@Icons.Material.Filled.PlusOne" Color="Color.Primary" />
-        <MudIconButton Icon="@Icons.Custom.Brands.MudBlazor" Color="Color.Primary" Link="https://mudblazor.com/" Target="_blank" />
-        <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Primary" Link="https://github.com/MudBlazor/MudBlazor/" Target="_blank" />*@
+
+@*         <MudToggleIconButton @bind-Toggled="@_mudThemeProvider.IsDarkMode"
+        Icon="@Icons.Material.Filled.LightMode" Color="@Color.Warning" Title="Off"
+        ToggledIcon="@Icons.Material.Filled.DarkMode" ToggledColor="@Color.Warning" ToggledTitle="On" /> *@
+
+        <MudIconButton Href="home" Icon="@Icons.Material.Filled.Email" Color="Color.Dark" />
+        <MudIconButton Href="home" Icon="@Icons.Material.Filled.Work" Color="Color.Dark" />
+        <MudIconButton Href="home" Icon="@Icons.Material.Filled.Home" Color="Color.Dark" />
+        <MudIconButton Href="home" Icon="@Icons.Material.Filled.Add" Color="Color.Dark" />
+        <MudIconButton Href="home" Icon="@Icons.Material.Filled.Link" Color="Color.Dark" />
         <MudSpacer />
     </MudAppBar>
-    <MudDrawer @bind-Open="_drawerOpen" Elevation="1">
-        <MudDrawerHeader>
-            <MudText Typo="Typo.h6">MudBlazorTemplates1</MudText>
-        </MudDrawerHeader>
-        <NavMenu />
-    </MudDrawer>
+
     <MudMainContent>
-        <MudContainer MaxWidth="MaxWidth.Large" Class="my-16 pt-16">
+        <MudContainer MaxWidth="MaxWidth.Large" Style="width:750px; text-align:center; margin-top:20px">
             @Body
         </MudContainer>
     </MudMainContent>
 </MudLayout>
 
 @code {
-    bool _drawerOpen = false;
-
-    void DrawerToggle()
+    protected override async Task OnInitializedAsync()
     {
-        _drawerOpen = !_drawerOpen;
+        _mudThemeProvider.IsDarkMode = true;
+        await base.OnInitializedAsync();
     }
 }

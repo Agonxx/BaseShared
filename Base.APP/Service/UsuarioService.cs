@@ -20,6 +20,16 @@ namespace Base.APP.Service
                 return null;
         }
         
+        public async Task<Usuario> CadastrarUsuario(Usuario usuarioObj)
+        {
+            var content = await base.Post(usuarioObj, UsuarioAPI.CadastrarUsuario);
+
+            if (!string.IsNullOrEmpty(content))
+                return JsonSerializer.Deserialize<Usuario>(content, _options);
+            else
+                return null;
+        }
+        
         public async Task<List<Usuario>> BuscarUsuarios()
         {
             var content = await base.Get(UsuarioAPI.BuscarUsuarios);

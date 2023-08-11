@@ -13,11 +13,12 @@ namespace Base.API.Repository
             _db = context;
         }
 
-        public async Task<Usuario> CadastrarUsuario(Usuario usuario)
+        public async Task<Usuario> CadastrarUsuario(Usuario usuarioObj)
         {
-            await _db.Usuarios.AddAsync(usuario);
+            usuarioObj.Email = $"{usuarioObj.Email}{usuarioObj.Provedor}";
+            await _db.Usuarios.AddAsync(usuarioObj);
             await _db.SaveChangesAsync();
-            return usuario;
+            return usuarioObj;
         }
 
         public async Task<Usuario> AddUsuario()
