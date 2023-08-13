@@ -1,0 +1,20 @@
+
+
+
+.sub-main-layout {
+    width: 700px;
+}
+
+.rodape {
+    top: auto;
+    bottom: 0;
+    text-align: center;
+}
+
+.custom-main-layout {
+    width: 100%;
+    max-width: 970px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 60px 15px;
+}

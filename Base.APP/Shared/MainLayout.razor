@@ -7,9 +7,10 @@
 
 <MudLayout>
     <MudAppBar Elevation="0" Color="_mudThemeProvider.IsDarkMode ? Color.Primary : Color.Dark" Style="text-align:center;">
+
         <MudSpacer />
 
-@*         <MudToggleIconButton @bind-Toggled="@_mudThemeProvider.IsDarkMode"
+        @*         <MudToggleIconButton @bind-Toggled="@_mudThemeProvider.IsDarkMode"
         Icon="@Icons.Material.Filled.LightMode" Color="@Color.Warning" Title="Off"
         ToggledIcon="@Icons.Material.Filled.DarkMode" ToggledColor="@Color.Warning" ToggledTitle="On" /> *@
 
@@ -22,10 +23,17 @@
     </MudAppBar>
 
     <MudMainContent>
-        <MudContainer MaxWidth="MaxWidth.Large" Style="width:750px; text-align:center; margin-top:20px">
-            @Body
+        <MudContainer MaxWidth="MaxWidth.Large">
+            <div class="custom-main-layout">
+                @Body
+            </div>
         </MudContainer>
     </MudMainContent>
+    <MudAppBar Elevation="1" Color="_mudThemeProvider.IsDarkMode ? Color.Primary : Color.Dark" Style="top: auto; bottom: 0; text-align: center;">
+        <MudSpacer />
+        Rodapé do pai
+        <MudSpacer />
+    </MudAppBar>
 </MudLayout>
 
 @code {

@@ -8,48 +8,51 @@
 @inject IUsuarioService _usuarioService
 @inject MudThemeProvider _mudThemeProvider
 
-<div class="main-layout-base">
-    <MudGrid>
-        <MudItem xs="12">
-            <MudField Label="Escolha o gênero" Variant="Variant.Text" InnerPadding="false">
-                <MudRadioGroup @bind-SelectedOption="UsuarioObj.Genero" Required="true" RequiredError="Selecione o gênero">
-                    <MudRadio Option="@ComumEnums.EGenero.Masculino" Color="Color.Primary" Size="Size.Small">@ComumEnums.EGenero.Masculino.GetDescription()</MudRadio>
-                    <MudRadio Option="@ComumEnums.EGenero.Feminino" Color="Color.Primary" Size="Size.Small">@ComumEnums.EGenero.Feminino.GetDescription()</MudRadio>
-                    <MudRadio Option="@ComumEnums.EGenero.Outro" Color="Color.Primary" Size="Size.Small">@ComumEnums.EGenero.Outro.GetDescription()</MudRadio>
-                </MudRadioGroup>
-            </MudField>
-        </MudItem>
-        <MudItem xs="6">
-            <MudTextField Label="Nome" HelperText="exemplo de texto" @bind-Value="UsuarioObj.Nome" />
-        </MudItem>
-        <MudItem xs="6">
-            <MudTextField Label="Apelido" HelperText="exemplo de texto" @bind-Value="UsuarioObj.Apelido" />
-        </MudItem>
-        <MudItem xs="4">
-            <MudTextField Label="Email" HelperText="exemplo de texto" @bind-Value="UsuarioObj.Email" />
-        </MudItem>
-        <MudItem xs="4">
-            <MudSelect T="string" Label="Provedor" AnchorOrigin="Origin.BottomCenter" Disabled="string.IsNullOrEmpty(UsuarioObj.Email)" @bind-Value="UsuarioObj.Provedor" Clearable>
-                <MudSelectItem Value="@("@gmail.com")" />
-                <MudSelectItem Value="@("@outlook.com")" />
-                <MudSelectItem Value="@("@hotmail.com")" />
-            </MudSelect>
-        </MudItem>
-        <MudItem xs="4">
-            <MudButton Variant="Variant.Filled" Color="Color.Primary" Style="width: 120px" OnClick="CadastrarUsuario">
-                Cadastrar
-            </MudButton>
-        </MudItem>
-    </MudGrid>
-
-    <MudDataGrid T="Usuario" Items="@Usuarios">
-        <Columns>
-            <PropertyColumn Property="x => x.Nome" Title="Nome" />
-            <PropertyColumn Property="x => x.Apelido" Title="Apelido" />
-            <PropertyColumn Property="x => x.Genero" Title="Gênero" />
-            <PropertyColumn Property="x => x.Email" Title="Email" />
-        </Columns>
-    </MudDataGrid>
+<div class="sub-main-layout">
+    <div class="formulario">
+        <MudGrid>
+            <MudItem xs="12">
+                <MudField Label="Escolha o gênero" Variant="Variant.Text" InnerPadding="false">
+                    <MudRadioGroup @bind-SelectedOption="UsuarioObj.Genero" Required="true" RequiredError="Selecione o gênero">
+                        <MudRadio Option="@ComumEnums.EGenero.Masculino" Color="Color.Primary" Size="Size.Small">@ComumEnums.EGenero.Masculino.GetDescription()</MudRadio>
+                        <MudRadio Option="@ComumEnums.EGenero.Feminino" Color="Color.Primary" Size="Size.Small">@ComumEnums.EGenero.Feminino.GetDescription()</MudRadio>
+                        <MudRadio Option="@ComumEnums.EGenero.Outro" Color="Color.Primary" Size="Size.Small">@ComumEnums.EGenero.Outro.GetDescription()</MudRadio>
+                    </MudRadioGroup>
+                </MudField>
+            </MudItem>
+            <MudItem xs="6">
+                <MudTextField Label="Nome" HelperText="exemplo de texto" @bind-Value="UsuarioObj.Nome" />
+            </MudItem>
+            <MudItem xs="6">
+                <MudTextField Label="Apelido" HelperText="exemplo de texto" @bind-Value="UsuarioObj.Apelido" />
+            </MudItem>
+            <MudItem xs="4">
+                <MudTextField Label="Email" HelperText="exemplo de texto" @bind-Value="UsuarioObj.Email" />
+            </MudItem>
+            <MudItem xs="4">
+                <MudSelect T="string" Label="Provedor" AnchorOrigin="Origin.BottomCenter" Disabled="string.IsNullOrEmpty(UsuarioObj.Email)" @bind-Value="UsuarioObj.Provedor" Clearable>
+                    <MudSelectItem Value="@("@gmail.com")" />
+                    <MudSelectItem Value="@("@outlook.com")" />
+                    <MudSelectItem Value="@("@hotmail.com")" />
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="4">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Style="width: 120px" OnClick="CadastrarUsuario">
+                    Cadastrar
+                </MudButton>
+            </MudItem>
+        </MudGrid>
+    </div>
+    <div class="tabela">
+        <MudDataGrid T="Usuario" Items="@Usuarios">
+            <Columns>
+                <PropertyColumn Property="x => x.Nome" Title="Nome" />
+                <PropertyColumn Property="x => x.Apelido" Title="Apelido" />
+                <PropertyColumn Property="x => x.Genero" Title="Gênero" />
+                <PropertyColumn Property="x => x.Email" Title="Email" />
+            </Columns>
+        </MudDataGrid>
+    </div>
 </div>
 
 <MudDialog Style="text-align:center" IsVisible="DialogVisible" OnBackdropClick="() => DialogVisible = false">
@@ -90,11 +93,3 @@
         StateHasChanged();
     }
 }
-<style>
-    .main-layout-base {
-        width: 700px;
-        text-align: center;
-        padding: 10px;
-        background-color: #383843;
-    }
-</style>
