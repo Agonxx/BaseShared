@@ -3,6 +3,7 @@
 
 .sub-main-layout {
     width: 700px;
+    text-align: center;
 }
 
 .rodape {
@@ -12,6 +13,9 @@
 }
 
 .custom-main-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     max-width: 970px;
     box-sizing: border-box;
