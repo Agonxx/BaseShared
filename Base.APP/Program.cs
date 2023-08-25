@@ -19,7 +19,7 @@ builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
 builder.Services.AddHttpClient("Base.API", opts =>
 {
-    opts.BaseAddress = new Uri("https://localhost:44316/");
+    opts.BaseAddress = new Uri("https://localhost:7118/");
 });
 
 await builder.Build().RunAsync();

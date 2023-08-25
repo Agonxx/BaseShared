@@ -44,14 +44,51 @@
         </MudGrid>
     </div>
     <div class="tabela">
-        <MudDataGrid T="Usuario" Items="@Usuarios">
-            <Columns>
-                <PropertyColumn Property="x => x.Nome" Title="Nome" />
-                <PropertyColumn Property="x => x.Apelido" Title="Apelido" />
-                <PropertyColumn Property="x => x.Genero" Title="Gênero" />
-                <PropertyColumn Property="x => x.Email" Title="Email" />
-            </Columns>
-        </MudDataGrid>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">nº</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Apelido</th>
+                    <th scope="col">Gênero</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Usuarios)
+                {
+                    <tr>
+                        <th scope="row">@item.Id</th>
+                        <td>@item.Nome</td>
+                        <td>@item.Apelido</td>
+                        <td>@item.Genero</td>
+                        <td>@item.Email</td>
+                        <td>
+                            <button type="button" class="btn btn-warning" @onclick="() => GerarQRCode(item)">
+                                <i class="fa fa-qrcode" />
+                            </button>
+                            <button type="button" class="btn btn-primary" @onclick="() => VisualizarPedido(item)">
+                                <i class="fa fa-eye" />
+                            </button>
+                            <button type="button" class="btn btn-danger" @onclick="() => EscluirPedido(item)">
+                                <i class="fa fa-trash" />
+                            </button>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+        @* <MudDataGrid T="Usuario" Items="@Usuarios">
+        <Columns>
+        <PropertyColumn Property="x => x.Nome" Title="Nome" />
+        <PropertyColumn Property="x => x.Apelido" Title="Apelido" />
+        <PropertyColumn Property="x => x.Genero" Title="Gênero" />
+        <PropertyColumn Property="x => x.Email" Title="Email" />
+        </Columns>
+        </MudDataGrid> *@
     </div>
 </div>
 
@@ -87,9 +124,25 @@
         }
 
     }
+
     public async Task AtualizaGrid()
     {
         Usuarios = await _usuarioService.BuscarUsuarios();
         StateHasChanged();
+    }
+
+    public void GerarQRCode(Usuario usuario)
+    {
+        var teste = usuario;
+    }
+
+    public void VisualizarPedido(Usuario usuario)
+    {
+        var teste = usuario;
+    }
+
+    public void EscluirPedido(Usuario usuario)
+    {
+        var teste = usuario;
     }
 }
