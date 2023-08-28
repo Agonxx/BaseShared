@@ -15,7 +15,20 @@ namespace Base.Shared.Enums
 
             [Description("Outro")]
             Outro = 3,
+        }
 
+
+        [Flags]
+        public enum ETamanho : uint
+        {
+            [Description("250ml")]
+            Pequeno = 1,
+
+            [Description("400ml")]
+            Médio = 2,
+
+            [Description("700ml")]
+            Grande = 3,
         }
     }
 

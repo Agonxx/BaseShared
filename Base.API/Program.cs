@@ -29,6 +29,8 @@ builder.Services.AddCors(options => options
 
 // Area para declarar os Respositorys
 builder.Services.AddScoped<UsuarioRepository>();
+builder.Services.AddScoped<ConfiguracaoRepository>();
+builder.Services.AddScoped<PedidoRepository>();
 
 // Add services to the container.
 

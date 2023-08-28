@@ -16,6 +16,9 @@ builder.Services.AddMudServices();
 builder.Services.AddScoped<MudThemeProvider>();
 
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IConfiguracaoService, ConfiguracaoService>();
+builder.Services.AddScoped<ISaborService, SaborService>();
+builder.Services.AddScoped<IPedidoService, PedidoService>();
 
 builder.Services.AddHttpClient("Base.API", opts =>
 {

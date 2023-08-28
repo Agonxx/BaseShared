@@ -1,0 +1,89 @@
+﻿@using Base.APP.Service;
+@using Base.Shared.Models;
+
+@inject IConfiguracaoService _configuracaoService
+
+@if (Inicializado)
+{
+    <MudDialog>
+        <DialogContent>
+            <div class="configuracoes-main">
+                <MudGrid>
+                    <MudItem xs="4">
+                        <MudTextField Label="Nome" HelperText="Dado obrigatório para Pix" @bind-Value="ConfiguracaoObj.NomePix" />
+                    </MudItem>
+                    <MudItem xs="4">
+                        <MudTextField Label="Cidade" HelperText="Dado obrigatório para Pix" @bind-Value="ConfiguracaoObj.CidadePix" />
+                    </MudItem>
+                    <MudItem xs="4">
+                        <MudTextField Label="Chave" HelperText="Dado obrigatório para Pix" @bind-Value="ConfiguracaoObj.ChavePix" />
+                    </MudItem>
+                    <MudItem xs="4">
+                        <MudTextField T="decimal" Label="Valor 250ml" Format="N2" HelperText="Valor do Menor" @bind-Value="ConfiguracaoObj.ValorPequeno" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.MonetizationOn" />
+                    </MudItem>
+                    <MudItem xs="4">
+                        <MudTextField T="decimal" Label="Valor 400ml" Format="N2" HelperText="Valor do Médio" @bind-Value="ConfiguracaoObj.ValorMedio" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.MonetizationOn" />
+                    </MudItem>
+                    <MudItem xs="4">
+                        <MudTextField T="decimal" Label="Valor 700ml" Format="N2" HelperText="Valor do Maior" @bind-Value="ConfiguracaoObj.ValorGrande" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.MonetizationOn" />
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudTextField T="decimal" Label="Valor do adicional" Format="N2" HelperText="Valor cobrado pelo adicional" @bind-Value="ConfiguracaoObj.ValorAdicional" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.MonetizationOn" />
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudTextField T="decimal" Label="Valor da Entrega" Format="N2" HelperText="Valor total cobrado pela entrega" @bind-Value="ConfiguracaoObj.ValorEntrega" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.MonetizationOn" />
+                    </MudItem>
+                </MudGrid>
+            </div>
+        </DialogContent>
+        <DialogActions>
+            <MudButton Color="Color.Error" Variant="Variant.Filled" OnClick="Cancelar">Cancelar</MudButton>
+            <MudButton Color="Color.Success" Variant="Variant.Filled" OnClick="Salvar">Salvar</MudButton>
+        </DialogActions>
+    </MudDialog>
+}
+@code {
+
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    public Configuracao ConfiguracaoObj { get; set; } = new();
+    private bool Inicializado { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        ConfiguracaoObj = await _configuracaoService.BuscarConfiguracao();
+
+        if (ConfiguracaoObj is null)
+            ConfiguracaoObj = new();
+
+        Inicializado = true;
+        await base.OnInitializedAsync();
+    }
+
+    private void Cancelar()
+    {
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+
+    private async void Salvar()
+    {
+        var ret = await _configuracaoService.SalvarConfiguracao(ConfiguracaoObj);
+
+        MudDialog.Close(DialogResult.Ok(true));
+    }
+
+}
+
+<style>
+
+    .mud-typography-h6 {
+        text-align: center;
+    }
+
+    .configuracoes-main {
+        width: 550px;
+        height: auto;
+        margin-top: 0px;
+    }
+</style>

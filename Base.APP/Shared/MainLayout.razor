@@ -1,4 +1,10 @@
-﻿@inject MudThemeProvider _mudThemeProvider
+﻿@using Base.APP.Pages.Componentes;
+@using Base.APP.Service;
+@using Base.Shared.Models;
+
+@inject MudThemeProvider _mudThemeProvider
+@inject IDialogService DialogService
+@inject IConfiguracaoService _configuracaoService
 @inherits LayoutComponentBase
 
 <MudThemeProvider @ref="_mudThemeProvider" IsDarkMode="_mudThemeProvider.IsDarkMode" />
@@ -14,11 +20,11 @@
         Icon="@Icons.Material.Filled.LightMode" Color="@Color.Warning" Title="Off"
         ToggledIcon="@Icons.Material.Filled.DarkMode" ToggledColor="@Color.Warning" ToggledTitle="On" /> *@
 
-        <MudIconButton Href="home" Icon="@Icons.Material.Filled.Email" Color="Color.Dark" />
-        <MudIconButton Href="home" Icon="@Icons.Material.Filled.Work" Color="Color.Dark" />
+        @*         <MudIconButton Href="home" Icon="@Icons.Material.Filled.Email" Color="Color.Dark" /> *@
+        <MudIconButton OnClick="ShowConfig" Icon="@Icons.Material.Filled.Settings" Color="Color.Dark" />
         <MudIconButton Href="home" Icon="@Icons.Material.Filled.Home" Color="Color.Dark" />
-        <MudIconButton Href="home" Icon="@Icons.Material.Filled.Add" Color="Color.Dark" />
-        <MudIconButton Href="home" Icon="@Icons.Material.Filled.Link" Color="Color.Dark" />
+        @*         <MudIconButton Href="home" Icon="@Icons.Material.Filled.Add" Color="Color.Dark" />
+        <MudIconButton Href="home" Icon="@Icons.Material.Filled.Link" Color="Color.Dark" /> *@
         <MudSpacer />
     </MudAppBar>
 
@@ -37,9 +43,17 @@
 </MudLayout>
 
 @code {
+
     protected override async Task OnInitializedAsync()
     {
         _mudThemeProvider.IsDarkMode = true;
         await base.OnInitializedAsync();
+    }
+
+    private void ShowConfig()
+    {
+        var parameters = new DialogParameters<ConfiguracaoComponent>();
+        var options = new DialogOptions() { CloseButton = true, CloseOnEscapeKey = true, Position = DialogPosition.Center };
+        DialogService.Show<ConfiguracaoComponent>("Configurações", parameters, options);
     }
 }
