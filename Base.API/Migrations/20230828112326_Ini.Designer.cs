@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Base.API.Migrations
 {
     [DbContext(typeof(BaseContext))]
-    [Migration("20230828023646_Ini")]
+    [Migration("20230828112326_Ini")]
     partial class Ini
     {
         /// <inheritdoc />
@@ -63,6 +63,20 @@ namespace Base.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Configuracoes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ChavePix = "rafhita1@gmail.com",
+                            CidadePix = "Rio Claro",
+                            NomePix = "Rafael",
+                            ValorAdicional = 1.5m,
+                            ValorEntrega = 1m,
+                            ValorGrande = 20m,
+                            ValorMedio = 15m,
+                            ValorPequeno = 10m
+                        });
                 });
 
             modelBuilder.Entity("Base.Shared.Models.Pedido", b =>

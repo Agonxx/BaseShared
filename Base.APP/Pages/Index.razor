@@ -7,6 +7,7 @@
 @using Base.Shared.Enums;
 
 @inject IUsuarioService _usuarioService
+@inject IConfiguracaoService _configuracaoService
 @inject IPedidoService _pedidoService
 @inject IDialogService DialogService
 @inject MudThemeProvider _mudThemeProvider
@@ -82,7 +83,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        ConfiguracaoObj = new Configuracao();
+        ConfiguracaoObj = await _configuracaoService.BuscarConfiguracao();
+
         await AtualizaGrid();
         await base.OnInitializedAsync();
 
@@ -108,8 +110,9 @@
 
     private void GerarQRCode(Pedido pedido)
     {
+        var total = pedido.ValorFinal + (ConfiguracaoObj.ValorEntrega / Pedidos.Count());
         var parameters = new DialogParameters<QRCode>();
-        parameters.Add(x => x.QrCode, $"https://gerarqrcodepix.com.br/api/v1?nome={ConfiguracaoObj.NomePix}&cidade={ConfiguracaoObj.CidadePix}&valor={pedido.ValorFinal}&saida=qr&chave={ConfiguracaoObj.ChavePix}");
+        parameters.Add(x => x.QrCode, $"https://gerarqrcodepix.com.br/api/v1?nome={ConfiguracaoObj.NomePix}&cidade={ConfiguracaoObj.CidadePix}&valor={total.ToString().Replace(",", ".")}&saida=qr&chave={ConfiguracaoObj.ChavePix}");
         var options = new DialogOptions() { CloseButton = true, CloseOnEscapeKey = true, Position = DialogPosition.Center };
         DialogService.Show<QRCode>("QR Code", parameters, options);
     }

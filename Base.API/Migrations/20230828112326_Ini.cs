@@ -77,6 +77,11 @@ namespace Base.API.Migrations
                 {
                     table.PrimaryKey("PK_Usuarios", x => x.Id);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Configuracoes",
+                columns: new[] { "Id", "ChavePix", "CidadePix", "NomePix", "ValorAdicional", "ValorEntrega", "ValorGrande", "ValorMedio", "ValorPequeno" },
+                values: new object[] { 1, "rafhita1@gmail.com", "Rio Claro", "Rafael", 1.5m, 1m, 20m, 15m, 10m });
         }
 
         /// <inheritdoc />

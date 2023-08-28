@@ -16,7 +16,13 @@ namespace Base.API.Data
         public DbSet<Sabor> Sabores { get; set; }
         public DbSet<Configuracao> Configuracoes { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Seed();
+        }
+
     }
+
 
     public static class ModelBuilderExtensions
     {
