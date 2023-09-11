@@ -1,11 +1,14 @@
 using Base.API.Data;
 using Base.API.Repository;
+using Base.API.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("ConexaoBanco");
+
+builder.Services.AddSignalR();
 
 builder.Services.AddDbContext<BaseContext>(opts =>
 {
@@ -51,6 +54,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.MapHub<HubBaseSignalR>("/chat");
 
 app.MapControllers();
 
