@@ -20,9 +20,7 @@ namespace Base.API.Data
         {
             modelBuilder.Seed();
         }
-
     }
-
 
     public static class ModelBuilderExtensions
     {

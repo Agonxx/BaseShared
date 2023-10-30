@@ -1,6 +1,7 @@
 using Base.API.Data;
 using Base.API.Repository;
 using Base.API.SignalR;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -9,6 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("ConexaoBanco");
 
 builder.Services.AddSignalR();
+builder.Services.AddResponseCompression(options =>
+    options.MimeTypes = ResponseCompressionDefaults
+    .MimeTypes
+    .Concat(new[] {"application/octet-stream"}));
 
 builder.Services.AddDbContext<BaseContext>(opts =>
 {
@@ -30,7 +35,6 @@ builder.Services.AddCors(options => options
     .AllowAnyOrigin()));
 
 
-// Area para declarar os Respositorys
 builder.Services.AddScoped<UsuarioRepository>();
 builder.Services.AddScoped<ConfiguracaoRepository>();
 builder.Services.AddScoped<PedidoRepository>();
@@ -52,6 +56,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseResponseCompression();
 
 app.UseAuthorization();
 
