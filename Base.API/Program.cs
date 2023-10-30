@@ -1,6 +1,5 @@
 using Base.API.Data;
 using Base.API.Repository;
-using Base.API.SignalR;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -9,7 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("ConexaoBanco");
 
-builder.Services.AddSignalR();
 builder.Services.AddResponseCompression(options =>
     options.MimeTypes = ResponseCompressionDefaults
     .MimeTypes
@@ -36,8 +34,6 @@ builder.Services.AddCors(options => options
 
 
 builder.Services.AddScoped<UsuarioRepository>();
-builder.Services.AddScoped<ConfiguracaoRepository>();
-builder.Services.AddScoped<PedidoRepository>();
 
 // Add services to the container.
 
@@ -60,8 +56,6 @@ app.UseHttpsRedirection();
 app.UseResponseCompression();
 
 app.UseAuthorization();
-
-app.MapHub<HubBaseSignalR>("/chat");
 
 app.MapControllers();
 

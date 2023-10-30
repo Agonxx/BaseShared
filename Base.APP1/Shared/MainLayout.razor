@@ -1,0 +1,59 @@
+﻿@using Base.APP.Pages.Componentes;
+@using Base.APP.Service;
+@using Base.Shared.Models;
+
+@inject MudThemeProvider _mudThemeProvider
+@inject IDialogService DialogService
+@inject IConfiguracaoService _configuracaoService
+@inherits LayoutComponentBase
+
+<MudThemeProvider @ref="_mudThemeProvider" IsDarkMode="_mudThemeProvider.IsDarkMode" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar Elevation="0" Color="_mudThemeProvider.IsDarkMode ? Color.Primary : Color.Dark" Style="text-align:center;">
+
+        <MudSpacer />
+
+        @*         <MudToggleIconButton @bind-Toggled="@_mudThemeProvider.IsDarkMode"
+        Icon="@Icons.Material.Filled.LightMode" Color="@Color.Warning" Title="Off"
+        ToggledIcon="@Icons.Material.Filled.DarkMode" ToggledColor="@Color.Warning" ToggledTitle="On" /> *@
+
+                <MudIconButton Href="home" Icon="@Icons.Material.Filled.List" Color="Color.Dark" />
+        <MudIconButton Href="home" Icon="@Icons.Material.Filled.Home" Color="Color.Dark" />
+        <MudIconButton OnClick="ShowConfig" Icon="@Icons.Material.Filled.Settings" Color="Color.Dark" />
+        @*         <MudIconButton Href="home" Icon="@Icons.Material.Filled.Add" Color="Color.Dark" />
+        <MudIconButton Href="home" Icon="@Icons.Material.Filled.Link" Color="Color.Dark" /> *@
+        <MudSpacer />
+    </MudAppBar>
+
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.Large">
+            <div class="custom-main-layout">
+                @Body
+            </div>
+        </MudContainer>
+    </MudMainContent>
+    <MudAppBar Elevation="1" Color="_mudThemeProvider.IsDarkMode ? Color.Primary : Color.Dark" Style="top: auto; bottom: 0; text-align: center;">
+        <MudSpacer />
+        Rodapé do pai
+        <MudSpacer />
+    </MudAppBar>
+</MudLayout>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        _mudThemeProvider.IsDarkMode = true;
+        await base.OnInitializedAsync();
+    }
+
+    private void ShowConfig()
+    {
+        var parameters = new DialogParameters<ConfiguracaoComponent>();
+        var options = new DialogOptions() { CloseButton = true, CloseOnEscapeKey = true, Position = DialogPosition.Center };
+        DialogService.Show<ConfiguracaoComponent>("Configurações", parameters, options);
+    }
+}

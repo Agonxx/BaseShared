@@ -12,9 +12,6 @@ namespace Base.API.Data
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<Pedido> Pedidos { get; set; }
-        public DbSet<Sabor> Sabores { get; set; }
-        public DbSet<Configuracao> Configuracoes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,17 +24,14 @@ namespace Base.API.Data
         public static void Seed(this ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<Configuracao>().HasData(new Configuracao[]
+            modelBuilder.Entity<Usuario>().HasData(new Usuario[]
             {
-                new Configuracao {
+                new Usuario {
                     Id = 1,
-                    NomePix ="Rafael",
-                    ChavePix = "rafhita1@gmail.com",
-                    CidadePix = "Rio Claro",
-                    ValorPequeno = 10m,
-                    ValorMedio = 15m,
-                    ValorGrande = 20m,
-                    ValorEntrega = 1m,
+                    Email = "Rafhita1@gmail.com",
+                    Genero = Shared.Enums.ComumEnums.EGenero.Masculino,
+                    Nome = "Rafael",
+                    Apelido = "Agon",
                 }
             });
         }

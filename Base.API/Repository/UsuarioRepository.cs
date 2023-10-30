@@ -27,7 +27,8 @@ namespace Base.API.Repository
             {
                 Nome = "Rafael",
                 Apelido = "Agon",
-                Email = "Rafhita1@gmail.com"
+                Email = "Rafhita1@gmail.com",
+                Genero = Shared.Enums.ComumEnums.EGenero.Masculino
             };
 
             await _db.Usuarios.AddAsync(user);
