@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Syncfusion.Blazor;
 
 namespace Base.MOBILE
 {
@@ -15,10 +16,10 @@ namespace Base.MOBILE
                 });
 
             builder.Services.AddMauiBlazorWebView();
-
+            builder.Services.AddSyncfusionBlazor();
 #if DEBUG
-		builder.Services.AddBlazorWebViewDeveloperTools();
-		builder.Logging.AddDebug();
+            builder.Services.AddBlazorWebViewDeveloperTools();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
