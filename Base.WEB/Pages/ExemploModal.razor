@@ -1,0 +1,49 @@
+﻿@using Base.Shared.Dto;
+@using Newtonsoft.Json;
+@using Syncfusion.Blazor.Buttons
+@using Syncfusion.Blazor.Calendars
+@using Syncfusion.Blazor.Popups
+@using Syncfusion.Blazor.Inputs
+@using System.Net.Http.Headers;
+
+<h3>ExemploModal</h3>
+
+<SfDialog Width="1080px" Height="700px" CssClass="warning-modal" IsModal="true" @bind-Visible="@Visibilidade" ShowCloseIcon="true" CloseOnEscape="true">
+    <DialogTemplates>
+        <Header>Exemplo de modal</Header>
+        <Content>
+            
+        </Content>
+    </DialogTemplates>
+    <DialogAnimationSettings Effect="DialogEffect.Zoom"></DialogAnimationSettings>
+    <DialogEvents OnClose="Close"></DialogEvents>
+    <DialogButtons>
+        <DialogButton Content="Salvar" IsPrimary="true" OnClick="Salvar" />
+        <DialogButton Content="Cancelar" IsPrimary="true" OnClick="Close" />
+    </DialogButtons>
+</SfDialog>
+
+@code {
+    [Parameter] public UsuarioDto UsuarioObj { get; set; }
+    [Parameter] public EventCallback FromChildSubmit { get; set; }
+
+    private bool Visibilidade { get; set; }
+
+    public void Open()
+    {
+        Visibilidade = true;
+        StateHasChanged();
+    }
+
+    public async Task Salvar()
+    {
+        await Close();
+    }
+
+    public async Task Close()
+    {
+        Visibilidade = false;
+        await FromChildSubmit.InvokeAsync();
+    }
+
+}

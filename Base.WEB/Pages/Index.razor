@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using Base.Shared.Dto;
 
 @inject IUsuarioService _usuarioService
 
@@ -11,15 +12,23 @@
 
 <SfGrid @ref="SFGrid" DataSource="ListaUsuarios"></SfGrid>
 
-
+<ExemploModal UsuarioObj="UsuarioObj"
+              FromChildSubmit="(async() => await CarregarLista())">
+</ExemploModal>
 
 @code {
+    public UsuarioDto UsuarioObj { get; set; }
     public List<Usuario> ListaUsuarios { get; set; } = new();
     public SfGrid<Usuario> SFGrid { get; set; }
 
     private async Task AddUsuario()
     {
         var teste = await _usuarioService.AddUsuario();
+        await CarregarLista();
+    }
+
+    public async Task CarregarLista()
+    {
         ListaUsuarios = await _usuarioService.BuscarUsuarios();
         await SFGrid.Refresh();
         StateHasChanged();

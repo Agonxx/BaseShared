@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Base.API.Migrations
 {
     [DbContext(typeof(BaseContext))]
-    [Migration("20231030015340_Ini")]
+    [Migration("20231030120556_Ini")]
     partial class Ini
     {
         /// <inheritdoc />
