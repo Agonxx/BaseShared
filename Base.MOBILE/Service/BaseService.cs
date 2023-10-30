@@ -9,7 +9,7 @@ namespace Base.MOBILE.Service
     {
         public BaseService(IHttpClientFactory httpClientFactory, NavigationManager navigation, IConfiguration configuracao) : base(httpClientFactory, navigation)
         {
-            NomeApi = configuracao.GetSection("Base.API").Value;
+            NomeApi = "Base.API";
             Url = typeof(T).Name.ToLower();
         }
 

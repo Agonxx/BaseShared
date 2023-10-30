@@ -1,7 +1,27 @@
 ﻿@page "/"
 
+@inject IUsuarioService _usuarioService
+
 <PageTitle>Base</PageTitle>
+
 
 <h1>Olá, Mundão!</h1>
 
+<SfButton OnClick="AddUsuario">Add Usuário</SfButton>
 
+<SfGrid @ref="SFGrid" DataSource="ListaUsuarios"></SfGrid>
+
+
+
+@code {
+    public List<Usuario> ListaUsuarios { get; set; } = new();
+    public SfGrid<Usuario> SFGrid { get; set; }
+
+    private async Task AddUsuario()
+    {
+        var teste = await _usuarioService.AddUsuario();
+        ListaUsuarios = await _usuarioService.BuscarUsuarios();
+        await SFGrid.Refresh();
+        StateHasChanged();
+    }
+}
